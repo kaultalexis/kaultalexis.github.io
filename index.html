@@ -16,6 +16,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+.ev-more{display:flex;align-items:center;gap:8px;margin-top:14px;font-weight:600;color:var(--blue);text-decoration:none}
+.ev-more .ar{transition:transform .35s var(--ease)}
+.ev:has(.ev-more):hover .ev-more .ar{transform:translateX(6px)}
+.ev:has(.ev-more){cursor:pointer}
+.editing .ev:has(.ev-more){cursor:default}
+</style>
+
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
@@ -105,7 +113,7 @@
       </article>
       <article class="ev cur">
         <div class="lg" data-logo="groupe-idec" data-alt="Groupe IDEC">IDEC<small>logo</small></div>
-        <div><p class="yr">2025 — 2027</p><h3>Alternance · Groupe IDEC</h3><p class="sp">Technicien support informatique</p><p>Résolution d'incidents, préparation de postes, et administration courante.</p><span class="now">● en cours</span></div>
+        <div><p class="yr">2025 — 2027</p><h3>Alternance · Groupe IDEC</h3><p class="sp">Technicien support informatique</p><p>Résolution d'incidents, préparation de postes, et administration courante.</p><span class="now">● en cours</span><a class="ev-more" href="entreprise-idec.html">Découvrir l'entreprise <span class="ar">→</span></a></div>
       </article>
     </div>
   </div>
@@ -397,6 +405,10 @@
     tl.style.setProperty('--tl',p);
     evs.forEach(function(e){var mid=e.offsetTop+e.offsetHeight/2;e.classList.toggle('show',line>=mid-e.offsetHeight*.45)})}
   if(calm){tl.style.setProperty('--tl',1);evs.forEach(function(e){e.classList.add('show')})}else{addEventListener('scroll',tlFill,{passive:true});addEventListener('resize',tlFill);tlFill()}
+
+  // Carte IDEC cliquable
+  document.querySelectorAll('.ev').forEach(function(ev){var l=ev.querySelector('.ev-more');if(!l)return;
+    ev.addEventListener('click',function(e){if(document.body.classList.contains('editing')||e.target.closest('a'))return;location.href=l.getAttribute('href')})});
 
   // Cascade des pastilles
   document.querySelectorAll('.chips').forEach(function(ul){[].forEach.call(ul.children,function(li,i){li.style.setProperty('--c',i)})});
